@@ -1,0 +1,243 @@
+/* Adicione o estilo para o contêiner dos balões */
+.balao-container {
+    display: flex;
+    flex-direction: column;   /* Por padrão, exibir um embaixo do outro */
+    gap: 20px;                /* Espaçamento entre os balões */
+    margin-bottom: 20px;      /* Margem inferior para separar do conteúdo abaixo */
+}
+
+/* Estilo para os balões de mensagem */
+.balao-mensagem {
+    background: #e1ffc7;          /* Cor de fundo do balão */
+    border: 1px solid #b0e57c;    /* Borda do balão */
+    border-radius: 10px;          /* Bordas arredondadas */
+    padding: 15px;                /* Espaçamento interno */
+    position: relative;           /* Para posicionar o triângulo corretamente */
+    width: 100%;                  /* Largura dos balões */
+    box-sizing: border-box;
+}
+
+/* Triângulo para o balão de mensagem */
+.balao-mensagem::before {
+    content: "";
+    position: absolute;
+    border-width: 10px;
+    border-style: solid;
+}
+
+/* Triângulo no lado esquerdo do balão */
+.balao-mensagem#explicacaoDias::before {
+    border-color: transparent #e1ffc7 transparent transparent; /* Cor correta para o triângulo */
+    top: 50%;
+    left: -20px;
+    transform: translateY(-50%);
+}
+
+/* Triângulo no lado direito do balão */
+.balao-mensagem#explicacaoDobra::before {
+    border-color: transparent transparent transparent #e1ffc7; /* Cor correta para o triângulo */
+    top: 50%;
+    right: -20px;
+    transform: translateY(-50%);
+}
+.image-flip {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff; /* Adiciona um fundo para visibilidade */
+    transition: height 0.5s ease-in-out; /* Suaviza a transição da altura */
+}
+
+.flip-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.flip-img.show {
+    position: relative; /* Faz a imagem afetar o layout do contêiner */
+    opacity: 1;
+}
+.sticker {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    z-index: 10; /* Garante que o adesivo fique acima da imagem */
+}
+.image-container .sticker {
+    display: none;
+}
+
+.image-container .flip-img.show + .sticker {
+    display: block;
+}
+/* Estilos gerais */
+body {
+    background-color: #F8F9FA; /* Branco gelo */
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #C19A6B; /* Amarelo escuro meio tom de caramelo */
+    border-radius: 8px;
+}
+
+/* Cabeçalho */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header img {
+    max-width: 100px;
+}
+
+/* Formulário */
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form-group {
+    flex: 1 1 100%;
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+/* Media queries para campos lado a lado */
+@media (min-width: 600px) {
+    .form-group {
+        flex: 1 1 48%;
+    }
+
+    .form-group:nth-child(odd) {
+        margin-right: 4%;
+    }
+}
+
+/* Tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+thead th {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+tbody td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+button:focus {
+    outline: none;
+}
+
+button.adicionarDiaBtn {
+    background-color: #28a745;
+}
+
+button.removerDiaBtn {
+    background-color: #dc3545;
+}
+
+/* Media queries para ajustar o layout dos balões em dispositivos maiores */
+@media (min-width: 768px) {
+    .balao-container {
+        flex-direction: row;  /* Em dispositivos maiores, exibir lado a lado */
+    }
+}
+
+/* Centraliza o botão de enviar */
+#enviarFormularioBtn {
+    display: block;
+    margin: 20px auto;
+}
+
+/* Botão de copiar */
+#copiarBtn {
+    display: block;
+    margin: 10px auto;
+    background-color: #ffc107;
+    color: black;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#copiarBtn:focus {
+    outline: none;
+}
+
+/* Resultado */
+#resultado {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    white-space: pre-line;
+    position: relative;
+}
+
+/* Ajustes para a tabela de dias trabalhados */
+.diaTrabalhado table {
+    width: 100%;
+}
+
+.diaTrabalhado td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.diaTrabalhado select {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Cabeçalho e Datas</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://i.imgur.com/u7GlCsK.png" alt="Logo">
+        </div>
+        <div class="balao-container">
+                <div class="balao-mensagem" id="explicacaoDias">
+            <p><strong>Bem-vindo ao Gerador de Texto de Dias Trabalhados para WhatsApp!</strong></p>
+            <p>A mensagem exibida no resultado pode parecer estranha à primeira vista, mas não se preocupe! Ela está formatada especificamente para funcionar com as opções de formatação do WhatsApp.</p>
+        </div>
+        <div class="balao-container">
+                <div class="balao-mensagem" id="explicacaoDias">
+            <p><strong>Insira seu nome, seguido pelo seu PIX. Em seguida, selecione o mercado e a área em que você trabalhou.</strong></p>
+        </div></div>
+        </div>
+        <p><h4>Exemplos de Antes e Depois</h4></p>
+        <div class="balao-container">
+                <div class="balao-mensagem" id="explicacaoDias">
+            <div class="image-flip">
+        <div class="image-container">
+            <img src="https://i.imgur.com/ZdT65qe.jpg" alt="Imagem Antes" class="flip-img show">
+            <div class="sticker">Antes</div>
+        </div>
+        <div class="image-container">
+            <img src="https://i.imgur.com/17LW2Yb.jpg" alt="Imagem Depois" class="flip-img">
+            <div class="sticker">Depois</div>
+        </div>
+        </div></div></div>
+        <h1>Formulário de Cabeçalho</h1>
+        <form id="formularioCompleto">
+            <div class="form-group">
+                <label for="nome">Digite o seu nome:</label>
+                <input type="text" id="nome" name="name" required autocomplete="name">
+            </div>
+
+            <div class="form-group">
+                <label for="pix">Digite o seu pix:</label>
+                <input type="text" id="pix" name="pix" required autocomplete="on">
+            </div>
+
+            <div class="form-group">
+                <label for="local">Digite qual mercado você trabalhou:</label>
+                <select id="local" name="local" required>
+                    <option value="Condor Agua Verde">Condor Agua Verde</option>
+                    <option value="Condor Novo Mundo">Condor Novo Mundo</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="area">Digite qual área você operou:</label>
+                <select id="area" name="area" required>
+                    <option value="Corte de Frutas">Corte de Frutas</option>
+                    <option value="Delivery">Delivery</option>
+                    <option value="Mercearia">Mercearia</option>
+                    <option value="Depósito">Depósito</option>
+                    <option value="Padaria">Padaria</option>
+                    <option value="Caixa">Caixa</option>
+                </select>
+            </div>
+
+            <div class="balao-container">
+                <div class="balao-mensagem" id="explicacaoDias">
+                    <p><strong>Selecione o <b>dia do mês</b> em que você trabalhou, e preencha as <b>horas de entrada e saída</b>.</strong></p>
+                    <p>Se você trabalhou em mais de um dia, adicione mais linhas clicando no botão <b>"+"</b>. Em cada nova linha:</p>
+                    <ol>
+                        <li>Selecione o <b>dia do mês</b> correspondente.</li>
+                        <li>Preencha as <b>horas de entrada</b> e <b>horas de saída</b> para esse dia.</li>
+                    </ol>
+                    <p>Após adicionar todos os dias necessários, clique no <b>botão Enviar</b> e, em seguida, no <b>botão Copiar</b> para copiar a mensagem gerada e colá-la no WhatsApp.</p>
+                </div>
+
+                <div class="balao-mensagem" id="explicacaoDobra">
+                    <p><strong>Trabalhou em dois turnos no mesmo dia?</strong></p>
+                    <p>Se você trabalhou em dois turnos no mesmo dia (ou seja, realizou uma "dobra"), siga os passos abaixo:</p>
+                    <ol>
+                        <li>Primeiro, adicione uma nova linha clicando no botão <b>"+"</b>.</li>
+                        <li>Na nova linha, selecione o <b>dia da dobra</b> que corresponde ao dia em que você trabalhou em dois turnos.</li>
+                        <li>Em seguida, preencha os campos com as <b>horas de entrada e saída</b> para o primeiro turno.</li>
+                        <li>Se precisar adicionar o segundo turno no mesmo dia, clique novamente no botão <b>"+"</b> para adicionar uma nova linha para o segundo turno.</li>
+                        <li>Na nova linha, selecione o mesmo <b>dia da dobra</b> e preencha as <b>horas de entrada e saída</b> para o segundo turno.</li>
+                    </ol>
+                    <p>Isso garantirá que todas as horas trabalhadas sejam corretamente registradas.</p>
+                </div>
+            </div>
+
+            <h1>Formulário de Dias Trabalhados</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dias<br>Trabalhados</th>
+                        <th>Hora<br>de entrada</th>
+                        <th>Hora<br>de saída</th>
+                        <th>Adicione ou<br>Remova Dia</th>
+                    </tr>
+                </thead>
+                <tbody id="diasTrabalhadosContainer">
+                    <!-- Campo de seleção de dias será adicionado pelo JavaScript -->
+                </tbody>
+            </table>
+            <br>
+            <button type="button" id="enviarFormularioBtn">Enviar</button>
+        </form>
+
+        <h2>Resultado:</h2>
+        <div id="resultado"></div>
+        <button id="copiarBtn">Copiar</button>
+    </div>
+
+    <script src="src/cabecalho.js"></script>
+    <script src="src/datas.js"></script>
+    <script src="src/main.js"></script>
+</body>
+</html>
