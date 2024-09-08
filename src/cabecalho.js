@@ -13,9 +13,9 @@ class Cabecalho {
         // Capitaliza a primeira letra de cada palavra
         nomeUs = nomeUs.split(' ').map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1).toLowerCase()).join(' ');
 
-        this.listaCabecalho.push(`*Nome:* _${nomeUs}_\n`);
+        this.listaCabecalho.push(`*Nome:* _${nomeUs}_`);
         this.listaCabecalho.push(`*Pix:* _${pix}_\n`);
-        this.listaCabecalho.push(`_${local}_\n`);
+        this.listaCabecalho.push(`_${local}_`);
         this.listaCabecalho.push(`_${area}_`);
 
         return this.listaCabecalho.join('<br>');

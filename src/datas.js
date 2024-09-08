@@ -6,7 +6,9 @@ class Datas {
 
     inputDia(diasTra, hrini, hrfin) {
         diasTra.forEach((dia, index) => {
-            this.listaDatas.push(`* ${dia} - ${hrini[index]} às ${hrfin[index]}`);
+            // Converter a data para o formato "dd/mm/aaaa"
+            const dataFormatada = dia.split('-').reverse().join('/');
+            this.listaDatas.push(`* ${dataFormatada} - ${hrini[index]} às ${hrfin[index]}`);
         });
         return this.listaDatas.join('<br>');
     }
@@ -18,10 +20,11 @@ function adicionarCampoDia() {
     // Criar uma nova linha
     const novaLinha = tabelaBody.insertRow();
 
-    // Criar os campos select para o dia, hora de entrada e hora de saída
-    const novoSelect = document.createElement('select');
-    novoSelect.className = 'diasTrab';
-    novoSelect.name = 'diasTrab';
+    // Criar os campos de input para a data, hora de entrada e hora de saída
+    const novoInputData = document.createElement('input');
+    novoInputData.type = 'date';
+    novoInputData.className = 'diasTrab';
+    novoInputData.name = 'diasTrab';
 
     const hriniSelect = document.createElement('select');
     hriniSelect.className = 'hrini';
@@ -31,13 +34,12 @@ function adicionarCampoDia() {
     hrfinSelect.className = 'hrfin';
     hrfinSelect.name = 'hrfin';
 
-    adicionarOpcaoDias(novoSelect);
     adicionarOpcaoHoras(hriniSelect);
     adicionarOpcaoHoras(hrfinSelect);
 
     // Adicionar os campos à nova linha
     let celula = novaLinha.insertCell();
-    celula.appendChild(novoSelect);
+    celula.appendChild(novoInputData);
 
     celula = novaLinha.insertCell();
     celula.appendChild(hriniSelect);
@@ -70,23 +72,20 @@ function adicionarCampoDia() {
     }
 
     // Preencher a nova linha com os dados da linha anterior
-    preencherCamposComValoresAnteriores(novoSelect, hriniSelect, hrfinSelect);
+    preencherCamposComValoresAnteriores(novoInputData, hriniSelect, hrfinSelect);
 }
 
-function preencherCamposComValoresAnteriores(novoSelect, hriniSelect, hrfinSelect) {
+function preencherCamposComValoresAnteriores(novoInputData, hriniSelect, hrfinSelect) {
     const linhas = document.querySelectorAll('#diasTrabalhadosContainer tr');
     if (linhas.length > 1) {
         const ultimaLinha = linhas[linhas.length - 2];
         const ultimoDia = ultimaLinha.querySelector('.diasTrab');
         const ultimoDiaValue = ultimoDia ? ultimoDia.value : '';
 
-        // Adicionar 1 dia ao valor selecionado
         if (ultimoDiaValue) {
-            const [dia, mes, ano] = ultimoDiaValue.split('/').map(Number);
-            const data = new Date(ano, mes - 1, dia);
+            const data = new Date(ultimoDiaValue);
             data.setDate(data.getDate() + 1); // Adiciona 1 dia
-            const novoDia = `${data.getDate().toString().padStart(2, '0')}/${(data.getMonth() + 1).toString().padStart(2, '0')}/${data.getFullYear()}`;
-            novoSelect.value = novoDia;
+            novoInputData.value = data.toISOString().split('T')[0]; // Formata para o valor do input date
         }
 
         const ultimaHrIni = ultimaLinha.querySelector('.hrini');
@@ -94,20 +93,6 @@ function preencherCamposComValoresAnteriores(novoSelect, hriniSelect, hrfinSelec
 
         if (ultimaHrIni) hriniSelect.value = ultimaHrIni.value;
         if (ultimaHrFin) hrfinSelect.value = ultimaHrFin.value;
-    }
-}
-
-function adicionarOpcaoDias(selectElement) {
-    const mes = new Date().getMonth() + 1;
-    const ano = new Date().getFullYear();
-    const diasNoMes = new Date(ano, mes, 0).getDate();
-
-    for (let dia = 1; dia <= diasNoMes; dia++) {
-        const diaStr = dia.toString().padStart(2, '0');
-        const opcao = document.createElement('option');
-        opcao.value = `${diaStr}/${mes.toString().padStart(2, '0')}/${ano}`;
-        opcao.text = `${diaStr}/${mes.toString().padStart(2, '0')}/${ano}`;
-        selectElement.add(opcao);
     }
 }
 
